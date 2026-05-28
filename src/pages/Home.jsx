@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Heart, Search, MapPin, DollarSign, Users, ChevronRight } from "lucide-react";
 import { apiDelete, apiGet, apiPost } from "../api/client.js";
-import HostelMap from "../components/HostelMap.jsx";
+import HeroBio from "../components/HeroBio.jsx";
 import { getUser } from "../utils/auth.js";
 
 const LoadingSkeleton = () => (
@@ -164,6 +164,9 @@ export default function Home() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Bio Section */}
+      <HeroBio />
+
       {/* Hero Section */}
       <motion.section
         className="mb-16 md:mb-24"
@@ -573,26 +576,6 @@ export default function Home() {
             View All Hostels
           </motion.button>
         </motion.div>
-      )}
-
-      {/* Map Section */}
-      {!loading && !error && hostels.length > 0 && (
-        <motion.section
-          className="mt-16 mb-12"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-            Explore on Map
-          </h2>
-          <motion.div
-            className="glass-dark rounded-3xl overflow-hidden"
-            whileHover={{ boxShadow: "0 20px 60px rgba(139, 92, 246, 0.15)" }}
-          >
-            <HostelMap hostels={hostels} />
-          </motion.div>
-        </motion.section>
       )}
     </motion.div>
   );

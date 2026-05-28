@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Section */}
           <motion.div variants={footerVariants}>
-            <h3 className="text-2xl font-bold text-gradient mb-4">StayScout</h3>
+            <h3 className="text-2xl font-bold text-gradient mb-4">RoomFlow</h3>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Connecting travelers with verified hostels worldwide. Find your perfect stay and make lasting memories.
             </p>
