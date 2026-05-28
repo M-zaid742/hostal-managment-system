@@ -20,57 +20,55 @@ function AppContent() {
   return (
     <>
       <LoadingSpinner isLoading={isLoading} />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<UserLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/hostels/:hostelId" element={<HostelDetails />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/subscribe" element={<OwnerSubscribe />} />
-            <Route
-              path="/profile"
-              element={(
-                <ProtectedRoute>
-                  <UserProfile />
-                </ProtectedRoute>
-              )}
-            />
-            <Route
-              path="/owner/dashboard"
-              element={(
-                <ProtectedRoute roles={["owner"]}>
-                  <OwnerDashboard />
-                </ProtectedRoute>
-              )}
-            />
-            <Route
-              path="/owner/hostels/new"
-              element={(
-                <ProtectedRoute roles={["owner"]}>
-                  <OwnerHostelForm />
-                </ProtectedRoute>
-              )}
-            />
-            <Route
-              path="/owner/hostels/:hostelId/edit"
-              element={(
-                <ProtectedRoute roles={["owner"]}>
-                  <OwnerHostelForm />
-                </ProtectedRoute>
-              )}
-            />
-            <Route
-              path="/admin/dashboard"
-              element={(
-                <ProtectedRoute roles={["admin"]}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              )}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route element={<UserLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/hostels/:hostelId" element={<HostelDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/subscribe" element={<OwnerSubscribe />} />
+          <Route
+            path="/profile"
+            element={(
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/owner/dashboard"
+            element={(
+              <ProtectedRoute roles={["owner"]}>
+                <OwnerDashboard />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/owner/hostels/new"
+            element={(
+              <ProtectedRoute roles={["owner"]}>
+                <OwnerHostelForm />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/owner/hostels/:hostelId/edit"
+            element={(
+              <ProtectedRoute roles={["owner"]}>
+                <OwnerHostelForm />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/admin/dashboard"
+            element={(
+              <ProtectedRoute roles={["admin"]}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            )}
+          />
+        </Route>
+      </Routes>
     </>
   );
 }
@@ -78,9 +76,11 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <LoadingProvider>
-        <AppContent />
-      </LoadingProvider>
+      <BrowserRouter>
+        <LoadingProvider>
+          <AppContent />
+        </LoadingProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
