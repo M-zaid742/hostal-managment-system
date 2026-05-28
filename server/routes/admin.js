@@ -15,7 +15,7 @@ router.get("/hostels/pending", async (req, res) => {
       `SELECT 
         h.id, h.name, h.city, h.area, h.address, h.phone, h.email, 
         h.gender, h.approval_status, h.created_at,
-        u.full_name as ownerName
+        u.name as ownerName
       FROM hostels h
       LEFT JOIN users u ON h.owner_id = u.id
       WHERE h.approval_status = $1
@@ -36,7 +36,7 @@ router.get("/hostels/approved", async (req, res) => {
       `SELECT 
         h.id, h.name, h.city, h.area, h.address, h.phone, h.email, 
         h.gender, h.approval_status, h.subscription_status, h.subscription_end_date,
-        u.full_name as ownerName
+        u.name as ownerName
       FROM hostels h
       LEFT JOIN users u ON h.owner_id = u.id
       WHERE h.approval_status = $1
