@@ -1,203 +1,157 @@
 import { motion } from "framer-motion";
-import { Users, Globe, Award, Zap } from "lucide-react";
+import { Globe, Users, Award, Zap, TrendingUp, Shield } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
-  },
+    transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+  }
 };
 
 const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 }
+  }
+};
+
+const featureCardVariants = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", stiffness: 120 }
+  },
+  hover: {
+    y: -12,
+    boxShadow: "0 20px 40px rgba(139, 92, 246, 0.2)",
+    transition: { duration: 0.3 }
+  }
+};
+
+const statVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const floatingVariants = {
-  float: {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
+    transition: { type: "spring", stiffness: 100 }
+  }
 };
 
 export default function HeroBio() {
   const features = [
-    {
-      icon: <Globe size={24} />,
-      title: "Global Network",
-      description: "Connect with travelers and hostels worldwide",
-    },
-    {
-      icon: <Users size={24} />,
-      title: "Community First",
-      description: "Join a vibrant community of adventurers",
-    },
-    {
-      icon: <Award size={24} />,
-      title: "Verified Reviews",
-      description: "Trust real guest experiences and ratings",
-    },
-    {
-      icon: <Zap size={24} />,
-      title: "Instant Booking",
-      description: "Reserve your perfect room instantly",
-    },
+    { icon: Globe, title: "Global Network", desc: "1,200+ verified hostels across 180+ countries" },
+    { icon: Shield, title: "Verified Reviews", desc: "Authentic feedback from real travelers" },
+    { icon: Zap, title: "Instant Booking", desc: "Quick and seamless reservation process" },
+    { icon: TrendingUp, title: "Best Prices", desc: "Competitive rates and exclusive deals" }
+  ];
+
+  const stats = [
+    { value: "50K+", label: "Active Travelers" },
+    { value: "1,200+", label: "Quality Hostels" },
+    { value: "180+", label: "Countries" },
+    { value: "4.8★", label: "Average Rating" }
   ];
 
   return (
     <motion.section
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"
-          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 1 }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header Section */}
-        <motion.div
-          className="text-center mb-16 md:mb-20"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            variants={itemVariants}
-          >
-            <span className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
-              Welcome to RoomFlow
-            </span>
-          </motion.h2>
-
-          <motion.p
-            className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed"
-            variants={itemVariants}
-          >
-            Your ultimate destination for finding the perfect hostel experience. 
-            Discover unique accommodations, connect with fellow travelers, and create 
-            unforgettable memories around the world.
-          </motion.p>
-
-          {/* Floating Icons */}
-          <motion.div
-            className="mt-12 flex justify-center gap-8 flex-wrap"
-            variants={itemVariants}
-          >
-            {[
-              { emoji: "🌍", label: "Global" },
-              { emoji: "✈️", label: "Travel" },
-              { emoji: "🤝", label: "Community" },
-              { emoji: "⭐", label: "Quality" },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="text-4xl md:text-5xl"
-                variants={floatingVariants}
-                animate="float"
-                transition={{ delay: idx * 0.1 }}
-              >
-                {item.emoji}
-              </motion.div>
-            ))}
-          </motion.div>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-blue-500/5 blur-3xl -z-10" />
+      
+      <div className="max-w-7xl mx-auto">
+        {/* Main heading */}
+        <motion.div variants={itemVariants} className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
+            Welcome to RoomFlow
+          </h2>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Discover authentic hostel experiences across the globe. Connect with fellow travelers, 
+            find the perfect accommodation, and create unforgettable memories.
+          </p>
         </motion.div>
 
         {/* Features Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
         >
-          {features.map((feature, idx) => (
+          {features.map((feature, idx) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={idx}
+                variants={featureCardVariants}
+                whileHover="hover"
+                className="glass-dark rounded-2xl p-6 border border-slate-700/30 cursor-pointer group"
+              >
+                <div className="mb-4 inline-flex p-3 rounded-xl bg-gradient-to-br from-indigo-600/20 to-purple-600/20 group-hover:from-indigo-600/40 group-hover:to-purple-600/40 transition-colors">
+                  <Icon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-50 mb-2">{feature.title}</h3>
+                <p className="text-slate-400 text-sm">{feature.desc}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Statistics */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
+        >
+          {stats.map((stat, idx) => (
             <motion.div
               key={idx}
-              className="group glass-dark rounded-2xl p-6 md:p-8 border border-slate-700/30 hover:border-purple-500/50 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.2)",
-              }}
+              variants={statVariants}
+              className="glass-dark rounded-xl p-6 border border-slate-700/30 text-center"
             >
-              {/* Icon */}
-              <motion.div
-                className="inline-block p-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-colors mb-4"
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="text-purple-400 group-hover:text-purple-300 transition-colors">
-                  {feature.icon}
-                </div>
-              </motion.div>
-
-              {/* Content */}
-              <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-400 transition-colors">
-                {feature.title}
-              </h3>
-              <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.description}
-              </p>
-
-              {/* Hover Effect Line */}
-              <motion.div
-                className="mt-4 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
+              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                {stat.value}
+              </div>
+              <div className="text-sm text-slate-400">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* CTA Section */}
+        {/* CTA Buttons */}
         <motion.div
-          className="mt-16 md:mt-20 text-center"
           variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">
-            Ready to find your perfect stay?
-          </p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg hover:shadow-indigo-500/50 transition-all"
           >
-            <motion.button
-              className="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold hover:shadow-lg transition-shadow"
+            Explore Hostels
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 rounded-xl font-semibold border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+          >
+            Learn More
+          </motion.button>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

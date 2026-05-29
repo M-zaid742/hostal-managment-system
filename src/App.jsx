@@ -11,6 +11,7 @@ import OwnerHostelForm from "./pages/OwnerHostelForm.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import ChatBoard from "./components/ChatBoard.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { LoadingProvider, useLoading } from "./context/LoadingContext.jsx";
 
@@ -20,6 +21,7 @@ function AppContent() {
   return (
     <>
       <LoadingSpinner isLoading={isLoading} />
+      <ChatBoard />
       <Routes>
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
