@@ -32,15 +32,6 @@ const featureCardVariants = {
   }
 };
 
-const statVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 100 }
-  }
-};
-
 export default function HeroBio() {
   const features = [
     { icon: Globe, title: "Global Network", desc: "1,200+ verified hostels across 180+ countries" },
@@ -117,7 +108,7 @@ export default function HeroBio() {
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
-              variants={statVariants}
+              variants={itemVariants}
               className="glass-dark rounded-xl p-6 border border-slate-700/30 text-center"
             >
               <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
@@ -147,62 +138,6 @@ export default function HeroBio() {
           >
             Learn More
           </motion.button>
-        </motion.div>
-      </div>
-    </motion.section>
-  );
-}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Explore Hostels
-            </motion.button>
-
-            <motion.button
-              className="px-8 py-3 rounded-xl border border-purple-500/50 text-purple-400 font-semibold hover:bg-purple-500/10 transition-colors"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              List Your Hostel
-            </motion.button>
-          </motion.div>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            { number: "50K+", label: "Happy Travelers" },
-            { number: "1200+", label: "Verified Hostels" },
-            { number: "180+", label: "Countries" },
-            { number: "4.8★", label: "Average Rating" },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              className="text-center"
-              variants={itemVariants}
-            >
-              <motion.p
-                className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 100, delay: idx * 0.1 }}
-              >
-                {stat.number}
-              </motion.p>
-              <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base">
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
         </motion.div>
       </div>
     </motion.section>
