@@ -117,11 +117,11 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-slate-50 mb-6">Contact Us</h4>
             <div className="space-y-4">
               <a
-                href="mailto:support@stayscout.com"
+                href="mailto:support@roomflow.com"
                 className="flex items-start gap-3 text-slate-400 hover:text-purple-400 transition-colors group"
               >
                 <Mail size={18} className="flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
-                <span className="text-sm">support@stayscout.com</span>
+                <span className="text-sm">support@roomflow.com</span>
               </a>
               <a
                 href="tel:+923001234567"
@@ -151,7 +151,7 @@ export default function Footer() {
           className="flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-slate-400 text-sm">
-            © {currentYear} StayScout. All rights reserved.
+            © {currentYear} RoomFlow. All rights reserved.
           </p>
           <p className="text-slate-400 text-sm">
             Made with <span className="text-red-500">❤️</span> for travelers and hostel owners
