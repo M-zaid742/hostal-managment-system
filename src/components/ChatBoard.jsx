@@ -16,7 +16,12 @@ export default function ChatBoard() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, text: 'Hi! Welcome to RoomFlow. How can I assist you today?', sender: 'bot', timestamp: new Date() }
+    { 
+      id: 1, 
+      text: 'Hi! Welcome to RoomFlow. How can I assist you today? (Tip: Click the X button in the top-right to close this chat)', 
+      sender: 'bot', 
+      timestamp: new Date() 
+    }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
@@ -115,18 +120,24 @@ export default function ChatBoard() {
                 <p className="text-sm text-indigo-100">We're here to help!</p>
               </div>
               <div className="flex gap-2">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="p-2 hover:bg-indigo-700/50 rounded-lg transition-colors"
+                  title={isMinimized ? "Expand chat" : "Minimize chat"}
+                  aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
                 >
                   {isMinimized ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
                   onClick={() => setIsOpen(false)}
                   className="p-2 hover:bg-indigo-700/50 rounded-lg transition-colors"
+                  title="Close chat (Click to hide)"
+                  aria-label="Close chat"
                 >
                   <X size={18} />
-                </button>
+                </motion.button>
               </div>
             </div>
 
