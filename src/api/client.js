@@ -19,7 +19,18 @@ export async function apiGet(path) {
     throw new Error(errorBody.message || `Request failed (${response.status})`);
   }
 
-  return response.json();
+  // Handle empty responses
+  const contentLength = response.headers.get('content-length');
+  if (contentLength === '0' || response.status === 204) {
+    return [];
+  }
+
+  const text = await response.text();
+  if (!text) {
+    return [];
+  }
+
+  return JSON.parse(text);
 }
 
 async function requestWithBody(method, path, payload) {
@@ -38,7 +49,18 @@ async function requestWithBody(method, path, payload) {
     throw new Error(errorBody.message || `Request failed (${response.status})`);
   }
 
-  return response.json();
+  // Handle empty responses
+  const contentLength = response.headers.get('content-length');
+  if (contentLength === '0' || response.status === 204) {
+    return {};
+  }
+
+  const text = await response.text();
+  if (!text) {
+    return {};
+  }
+
+  return JSON.parse(text);
 }
 
 export async function apiPost(path, payload) {
