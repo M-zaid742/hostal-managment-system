@@ -96,7 +96,7 @@ export default function ChatBoard() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg hover:shadow-indigo-500/50 transition-shadow"
+            className="fixed bottom-6 right-6 z-[9999] p-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg hover:shadow-indigo-500/50 transition-shadow"
           >
             <MessageCircle size={24} />
           </motion.button>
@@ -111,7 +111,7 @@ export default function ChatBoard() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className={`fixed bottom-6 right-6 z-40 w-96 ${isMinimized ? 'h-auto' : 'h-screen md:h-[600px]'} rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden`}
+            className={`fixed bottom-6 right-6 z-[9999] w-96 ${isMinimized ? 'h-auto' : 'h-screen md:h-[600px]'} rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden`}
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 flex items-center justify-between">
