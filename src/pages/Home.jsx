@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, Search, MapPin, DollarSign, Users, ChevronRight } from "lucide-react";
+import { Heart, Search, MapPin, DollarSign, Users, ChevronRight, CheckCircle, AlertTriangle } from "lucide-react";
 import { apiDelete, apiGet, apiPost } from "../api/client.js";
 import HeroBio from "../components/HeroBio.jsx";
+import HeroCinematic from "../components/HeroCinematic.jsx";
 import { getUser } from "../utils/auth.js";
 
 const LoadingSkeleton = () => (
@@ -167,6 +168,11 @@ export default function Home() {
       {/* Bio Section */}
       <HeroBio />
 
+      {/* Cinematic SVG+GSAP Hero */}
+      <div className="mb-12">
+        <HeroCinematic />
+      </div>
+
       {/* Hero Section */}
       <motion.section
         className="mb-16 md:mb-24"
@@ -178,12 +184,13 @@ export default function Home() {
           {/* Hero Content */}
           <motion.div className="lg:col-span-3" variants={itemVariants}>
             <motion.span
-              className="badge-modern mb-4"
+              className="badge-modern mb-4 flex items-center gap-2"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              ✨ Verified Hostels
+              <CheckCircle size={16} className="text-green-400" />
+              Verified Hostels
             </motion.span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 leading-tight">
               Find Your Perfect Hostel
@@ -368,7 +375,7 @@ export default function Home() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
-          <p className="text-red-300">⚠️ {error}</p>
+          <p className="text-red-300 flex items-center gap-2"><AlertTriangle size={18} />{error}</p>
         </motion.div>
       )}
 

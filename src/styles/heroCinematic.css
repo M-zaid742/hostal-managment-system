@@ -1,0 +1,70 @@
+.hero-cinematic {
+  width: 100%;
+  height: 520px;
+  background: #0a0a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.hero-inner { width: 100%; max-width: 1200px; transform: scale(0.98); }
+.iso-wrap { width: 100%; display:flex; align-items:center; justify-content:center; }
+.iso-svg { width: 720px; height: 420px; display:block; transform-origin: center center; opacity: 1; }
+.iso-group { transform-origin: center center; transform: translate(40px, 20px) skewX(-20deg) scale(1); }
+
+.room { opacity: 0.18; stroke: rgba(255,255,255,0.02); stroke-width: 0.5; }
+.room-available { fill: #00ff88; filter: drop-shadow(0 6px 18px rgba(0,255,136,0.08)); }
+.room-occupied { fill: #ff416c; filter: drop-shadow(0 6px 24px rgba(255,65,108,0.12)); }
+.room-checkout { fill: #ffd166; filter: drop-shadow(0 6px 18px rgba(255,209,102,0.08)); }
+.room-reserved { fill: #00f5ff; filter: drop-shadow(0 6px 18px rgba(0,245,255,0.08)); }
+
+.ui-overlay { position: absolute; inset: 20px; pointer-events: none; display:flex; justify-content:space-between; align-items:flex-start; }
+.brand h1 { color: #fff; font-size: 22px; margin: 6px 0 0 0; text-shadow: 0 6px 24px rgba(0,245,255,0.04); }
+.brand .tag { color: rgba(255,255,255,0.7); font-size:12px; margin-top:6px; }
+
+.ui-cards { display:flex; gap:12px; align-items:center; }
+.ui-card { width: 180px; padding: 12px 14px; border-radius: 12px; opacity: 0; transform: translateY(8px); }
+.glass { background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.04); backdrop-filter: blur(8px); }
+.card-title { font-size: 11px; color: rgba(255,255,255,0.7); }
+.card-value { font-weight:700; color: #dffbff; margin-top:6px; }
+
+.particles { position:absolute; inset:0; pointer-events:none; }
+.particles::before, .particles::after { content: ''; position:absolute; width:6px; height:6px; border-radius:50%; background:rgba(0,245,255,0.06); box-shadow: 0 0 12px rgba(139,92,246,0.02); left:20%; top:40%; }
+
+.p-dot { position:absolute; width:6px; height:6px; border-radius:50%; background:linear-gradient(180deg,#9be8ff, #00f5ff); opacity:0.06; filter: blur(6px); transform: translate3d(0,0,0); }
+.p-dot::after { content:''; position:absolute; left:50%; top:50%; width:10px; height:10px; transform:translate(-50%,-50%); border-radius:50%; box-shadow:0 8px 28px rgba(0,245,255,0.02); }
+
+.character { position:absolute; width:14px; height:14px; border-radius:50%; background:linear-gradient(135deg,#fff,#bfefff); box-shadow: 0 6px 28px rgba(0,245,255,0.12); pointer-events:none; transform: translate(-50%,-50%); opacity:0; }
+
+.booking-graph { display:flex; gap:6px; align-items:end; height:36px; padding:6px; }
+.booking-bar { width:10px; background:linear-gradient(180deg,#7ef7ff,#3ab3ff); border-radius:4px; height:6px; transform-origin: bottom; }
+
+.notif { position:relative; display:flex; align-items:center; gap:8px; }
+.notif-ping { width:10px; height:10px; border-radius:999px; background: #ff416c; box-shadow:0 6px 18px rgba(255,65,108,0.18); opacity:0; transform:scale(0.9); }
+
+/* Controls */
+.hero-controls { position:absolute; right:22px; bottom:18px; display:flex; gap:10px; align-items:center; z-index:40; }
+.control-btn { background: rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; backdrop-filter: blur(6px); cursor:pointer; }
+.control-btn:focus { outline:2px solid rgba(59,130,246,0.9); }
+.cta-btn { background: linear-gradient(90deg,#7c3aed,#06b6d4); color:#fff; padding:8px 14px; border-radius:12px; text-decoration:none; font-weight:600; box-shadow: 0 8px 28px rgba(124,58,237,0.18); }
+
+/* Gentle color grading overlay */
+.hero-cinematic::before { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(12,10,20,0.08), rgba(6,8,20,0.12)); pointer-events:none; mix-blend-mode:overlay; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-cinematic { height: 380px; }
+  .iso-svg { width: 100%; height: 320px; }
+  .ui-cards { display:none; }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic * { transition: none !important; animation: none !important; }
+  .p-dot, .iso-svg { opacity: 0 !important; }
+  .ui-card { transform: none !important; opacity: 1 !important; }
+}
+

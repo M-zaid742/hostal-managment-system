@@ -11,7 +11,7 @@ router.use(requireRole("admin"));
 // Get all pending hostels
 router.get("/hostels/pending", async (req, res) => {
   try {
-    const result = await query(
+    const hostels = await query(
       `SELECT 
         h.id, h.name, h.city, h.area, h.address, h.phone, h.email, 
         h.gender, h.approval_status, h.created_at,
@@ -22,7 +22,8 @@ router.get("/hostels/pending", async (req, res) => {
       ORDER BY h.created_at DESC`,
       ["pending"]
     );
-    res.json(result.rows);
+    console.log("✅ Pending hostels query result:", hostels.length, "rows");
+    res.json(hostels);
   } catch (error) {
     console.error("Error fetching pending hostels:", error);
     res.status(500).json({ error: error.message });
@@ -32,7 +33,7 @@ router.get("/hostels/pending", async (req, res) => {
 // Get all approved hostels
 router.get("/hostels/approved", async (req, res) => {
   try {
-    const result = await query(
+    const hostels = await query(
       `SELECT 
         h.id, h.name, h.city, h.area, h.address, h.phone, h.email, 
         h.gender, h.approval_status, h.subscription_status, h.subscription_end_date,
@@ -43,7 +44,7 @@ router.get("/hostels/approved", async (req, res) => {
       ORDER BY h.created_at DESC`,
       ["approved"]
     );
-    res.json(result.rows);
+    res.json(hostels);
   } catch (error) {
     console.error("Error fetching approved hostels:", error);
     res.status(500).json({ error: error.message });
@@ -56,7 +57,7 @@ router.put("/hostels/:hostelId/approve", async (req, res) => {
     const { hostelId } = req.params;
     
     // Update approval status and set subscription
-    const result = await query(
+    const results = await query(
       `UPDATE hostels 
       SET approval_status = $1, 
           subscription_status = $2,
@@ -67,13 +68,13 @@ router.put("/hostels/:hostelId/approve", async (req, res) => {
       ["approved", "active", hostelId]
     );
     
-    if (result.rows.length === 0) {
+    if (results.length === 0) {
       return res.status(404).json({ error: "Hostel not found" });
     }
     
     res.json({ 
       message: "Hostel approved successfully",
-      hostel: result.rows[0]
+      hostel: results[0]
     });
   } catch (error) {
     console.error("Error approving hostel:", error);
@@ -86,7 +87,7 @@ router.put("/hostels/:hostelId/reject", async (req, res) => {
   try {
     const { hostelId } = req.params;
     
-    const result = await query(
+    const results = await query(
       `UPDATE hostels 
       SET approval_status = $1, 
           subscription_status = $2,
@@ -96,13 +97,13 @@ router.put("/hostels/:hostelId/reject", async (req, res) => {
       ["rejected", "inactive", hostelId]
     );
     
-    if (result.rows.length === 0) {
+    if (results.length === 0) {
       return res.status(404).json({ error: "Hostel not found" });
     }
     
     res.json({ 
       message: "Hostel rejected successfully",
-      hostel: result.rows[0]
+      hostel: results[0]
     });
   } catch (error) {
     console.error("Error rejecting hostel:", error);
@@ -114,17 +115,17 @@ router.put("/hostels/:hostelId/reject", async (req, res) => {
 router.get("/stats", async (req, res) => {
   try {
     const [pendingCount, approvedCount, totalUsers, totalBookings] = await Promise.all([
-      query("SELECT COUNT(*) FROM hostels WHERE approval_status = $1", ["pending"]),
-      query("SELECT COUNT(*) FROM hostels WHERE approval_status = $1", ["approved"]),
-      query("SELECT COUNT(*) FROM users"),
-      query("SELECT COUNT(*) FROM bookings")
+      query("SELECT COUNT(*) as count FROM hostels WHERE approval_status = $1", ["pending"]),
+      query("SELECT COUNT(*) as count FROM hostels WHERE approval_status = $1", ["approved"]),
+      query("SELECT COUNT(*) as count FROM users"),
+      query("SELECT COUNT(*) as count FROM bookings")
     ]);
     
     res.json({
-      pendingApprovals: parseInt(pendingCount.rows[0].count),
-      approvedHostels: parseInt(approvedCount.rows[0].count),
-      totalUsers: parseInt(totalUsers.rows[0].count),
-      totalBookings: parseInt(totalBookings.rows[0].count)
+      pendingApprovals: parseInt(pendingCount[0].count),
+      approvedHostels: parseInt(approvedCount[0].count),
+      totalUsers: parseInt(totalUsers[0].count),
+      totalBookings: parseInt(totalBookings[0].count)
     });
   } catch (error) {
     console.error("Error fetching admin stats:", error);
